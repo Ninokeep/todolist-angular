@@ -1,0 +1,8 @@
+<div *ngIf="tasks" class="container">
+  <div *ngFor="let item of tasks; let index = index">
+    <div class="card">
+      <h3>{{ item.title }}</h3>
+      <p>{{ item.name }}</p>
+    </div>
+  </div>
+</div>

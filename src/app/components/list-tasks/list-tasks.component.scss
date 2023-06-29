@@ -1,0 +1,12 @@
+.card {
+  border: 1px solid gray;
+  height: 120px;
+  border-radius: 10px;
+}
+
+.container {
+  gap: 1rem;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+}
