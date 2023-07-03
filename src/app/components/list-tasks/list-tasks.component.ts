@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Form, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { MessageService } from 'primeng/api';
 import { Subject, takeUntil } from 'rxjs';
 import { Tasks } from 'src/app/models/tasks/tasks';
 import { TaskService } from 'src/app/services/tasks/task.service';
@@ -14,7 +15,11 @@ export class ListTasksComponent implements OnInit {
 
   destroy$ = new Subject();
   tasks: Tasks[] = [];
-  constructor(private taskService: TaskService, private fb: FormBuilder) {}
+  constructor(
+    private taskService: TaskService,
+    private fb: FormBuilder,
+    private ms: MessageService
+  ) {}
 
   ngOnInit(): void {
     this.taskService
@@ -35,6 +40,11 @@ export class ListTasksComponent implements OnInit {
             .forEach((element: Tasks) => {
               element = item;
             });
+          this.ms.add({
+            severity: 'success',
+            life: 1500,
+            summary: 'Task updated',
+          });
         }
       });
   }

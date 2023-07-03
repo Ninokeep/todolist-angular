@@ -10,6 +10,9 @@ import { TaskService } from './services/tasks/task.service';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { CheckboxModule } from 'primeng/checkbox';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ToastModule } from 'primeng/toast';
+import { MessageService } from 'primeng/api';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [AppComponent, ListTasksComponent, HomeComponent],
@@ -17,12 +20,14 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     BrowserModule,
     AppRoutingModule,
     ButtonModule,
+    BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
     CheckboxModule,
+    ToastModule,
   ],
-  providers: [TaskService, HttpClient],
+  providers: [TaskService, HttpClient, MessageService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
