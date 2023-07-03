@@ -30,7 +30,7 @@ export class ListTasksComponent implements OnInit {
       });
   }
 
-  updateStatusTask(id: number, finished: boolean) {
+  updateStatusTask({ id, finished }: { id: number; finished: boolean }) {
     this.taskService
       .updateStatusTask(id, !finished)
       .subscribe((item: Tasks) => {
