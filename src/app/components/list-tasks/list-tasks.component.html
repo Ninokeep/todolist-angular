@@ -1,8 +1,19 @@
-<div *ngIf="tasks" class="container">
+<div *ngIf="tasks" class="container--list-task">
   <div *ngFor="let item of tasks; let index = index">
     <div class="card">
-      <h3>{{ item.title }}</h3>
-      <p>{{ item.name }}</p>
+      <div class="container--card-header">
+        <p-checkbox
+          [(ngModel)]="item.finished"
+          [binary]="true"
+          (onChange)="updateStatusTask(item.id, !item.finished)"
+        />
+        <div>
+          <h3 class="title">{{ item.title }}</h3>
+        </div>
+      </div>
+      <div class="container--card-content">
+        <p class="text-gray">{{ item.name }}</p>
+      </div>
     </div>
   </div>
 </div>

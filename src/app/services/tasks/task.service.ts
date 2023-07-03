@@ -13,4 +13,8 @@ export class TaskService {
   getTasks(): Observable<Array<Tasks>> {
     return this.http.get<Array<Tasks>>(`${HOST}/todos`);
   }
+
+  updateStatusTask(id: number, finished: boolean): Observable<Tasks> {
+    return this.http.put<Tasks>(`${HOST}/todos/${id}`, { finished });
+  }
 }
