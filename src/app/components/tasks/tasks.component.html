@@ -1,13 +1,15 @@
-<div class="container--card-heade">
+<div class="container--card-header">
   <p-checkbox
     [(ngModel)]="task.finished"
     [binary]="true"
     (onChange)="updateTask(task.id, !task.finished)"
   />
-  <div>
-    <h3 class="title">{{ task.title }}</h3>
-  </div>
-  <div class="container--card-content">
-    <p class="text-gray">{{ task.name }}</p>
+  <div class="flex">
+    <div>
+      <h3 class="title">{{ task.title }}</h3>
+    </div>
+    <div class="container--card-content">
+      <p class="text-gray">{{ task.name }}</p>
+    </div>
   </div>
 </div>
