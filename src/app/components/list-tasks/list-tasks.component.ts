@@ -12,7 +12,7 @@ import { TaskService } from 'src/app/services/tasks/task.service';
 })
 export class ListTasksComponent implements OnInit {
   form?: FormGroup<{ finished: FormControl<boolean | null> }>;
-
+  loadingState?: boolean;
   destroy$ = new Subject();
   tasks: Tasks[] = [];
   constructor(
@@ -22,12 +22,19 @@ export class ListTasksComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.loadingState = true;
     this.taskService
       .getTasks()
       .pipe(takeUntil(this.destroy$))
-      .subscribe((tasks: Tasks[]) => {
-        this.tasks = tasks;
-      });
+      .subscribe(
+        (tasks: Tasks[]) => {
+          this.tasks = tasks;
+          this.loadingState = false;
+        },
+        (err) => {
+          this.loadingState = false;
+        }
+      );
   }
 
   updateStatusTask({ id, finished }: { id: number; finished: boolean }) {

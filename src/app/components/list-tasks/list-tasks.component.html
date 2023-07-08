@@ -1,12 +1,19 @@
 <div *ngIf="tasks" class="container--list-task">
-  <app-add-tasks></app-add-tasks>
-  <div *ngFor="let item of tasks; let index = index">
-    <div class="card">
-      <app-tasks
-        [task]="item"
-        (tasksUpdate)="updateStatusTask($event)"
-      ></app-tasks>
+  <ng-container *ngIf="!loadingState; else spinner">
+    <app-add-tasks></app-add-tasks>
+    <div *ngFor="let item of tasks; let index = index">
+      <div class="card">
+        <app-tasks
+          [task]="item"
+          (tasksUpdate)="updateStatusTask($event)"
+        ></app-tasks>
+      </div>
     </div>
-  </div>
-  <p-toast></p-toast>
+    <p-toast></p-toast>
+  </ng-container>
+  <ng-template #spinner>
+    <div>
+      <p-progressSpinner></p-progressSpinner>
+    </div>
+  </ng-template>
 </div>
