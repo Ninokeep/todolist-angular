@@ -1,0 +1,21 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.item--check {
+  display: flex;
+  gap: 0.2rem;
+}
+
+.container-btn {
+  display: flex;
+  gap: 1rem;
+}

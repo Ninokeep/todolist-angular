@@ -1,0 +1,23 @@
+<form (ngSubmit)="submit()" [formGroup]="form" class="form">
+  <div class="item">
+    <label htmlFor="title">Title</label>
+    <input formControlName="title" pInputText />
+  </div>
+  <div class="item">
+    <label htmlFor="name">Name</label>
+    <input formControlName="name" pInputText />
+  </div>
+  <div class="item--check">
+    <p-checkbox formControlName="finished" [binary]="true"></p-checkbox>
+    <label htmlFor="finished">Finished</label>
+  </div>
+  <div class="container-btn">
+    <button label="Cancel" pButton class="p-button-text"></button>
+    <button
+      label="Submit"
+      pButton
+      type="submit"
+      [loading]="loadingState"
+    ></button>
+  </div>
+</form>

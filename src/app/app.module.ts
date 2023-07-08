@@ -14,6 +14,12 @@ import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TasksComponent } from './components/tasks/tasks.component';
+import { AddTasksComponent } from './components/add-tasks/add-tasks.component';
+import { FormTasksComponent } from './components/form-tasks/form-tasks.component';
+import { DialogService, DynamicDialogModule } from 'primeng/dynamicdialog';
+import { ModalAddTasksComponent } from './components/add-tasks/modal-add-tasks/modal-add-tasks.component';
+import { InputTextModule } from 'primeng/inputtext';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
 
 @NgModule({
   declarations: [
@@ -21,6 +27,9 @@ import { TasksComponent } from './components/tasks/tasks.component';
     ListTasksComponent,
     HomeComponent,
     TasksComponent,
+    AddTasksComponent,
+    FormTasksComponent,
+    ModalAddTasksComponent,
   ],
   imports: [
     BrowserModule,
@@ -32,8 +41,11 @@ import { TasksComponent } from './components/tasks/tasks.component';
     HttpClientModule,
     CheckboxModule,
     ToastModule,
+    DynamicDialogModule,
+    InputTextModule,
+    ProgressSpinnerModule,
   ],
-  providers: [TaskService, HttpClient, MessageService],
+  providers: [TaskService, HttpClient, MessageService, DialogService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
