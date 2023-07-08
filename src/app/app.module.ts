@@ -13,7 +13,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
+import { RouterModule, provideRouter } from '@angular/router';
 @NgModule({
   declarations: [AppComponent, ListTasksComponent, HomeComponent],
   imports: [
