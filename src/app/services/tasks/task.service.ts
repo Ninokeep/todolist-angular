@@ -17,4 +17,12 @@ export class TaskService {
   updateStatusTask(id: number, finished: boolean): Observable<Tasks> {
     return this.http.put<Tasks>(`${HOST}/todos/${id}`, { finished });
   }
+
+  addTask(task: Tasks): Observable<Tasks> {
+    return this.http.post<Tasks>(`${HOST}/todos`, {
+      title: task.title,
+      name: task.name,
+      finished: task.finished,
+    });
+  }
 }

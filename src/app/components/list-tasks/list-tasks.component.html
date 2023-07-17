@@ -1,6 +1,6 @@
 <div *ngIf="tasks" class="container--list-task">
   <ng-container *ngIf="!loadingState; else spinner">
-    <app-add-tasks></app-add-tasks>
+    <app-add-tasks (itemAdded)="itemAddedFromModal($event)"></app-add-tasks>
     <div *ngFor="let item of tasks; let index = index">
       <div class="card">
         <app-tasks

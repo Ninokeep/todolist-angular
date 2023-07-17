@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Form, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { MessageService } from 'primeng/api';
 import { Subject, takeUntil } from 'rxjs';
 import { Tasks } from 'src/app/models/tasks/tasks';
@@ -18,7 +18,7 @@ export class ListTasksComponent implements OnInit {
   constructor(
     private taskService: TaskService,
     private fb: FormBuilder,
-    private ms: MessageService
+    private messageService: MessageService
   ) {}
 
   ngOnInit(): void {
@@ -47,12 +47,24 @@ export class ListTasksComponent implements OnInit {
             .forEach((element: Tasks) => {
               element = item;
             });
-          this.ms.add({
-            severity: 'success',
-            life: 1500,
-            summary: 'Task updated',
-          });
+          if (item.finished) {
+            this.messageService.add({
+              severity: 'success',
+              life: 1500,
+              summary: 'Task finished',
+            });
+          } else {
+            this.messageService.add({
+              severity: 'info',
+              life: 1500,
+              summary: 'Task not finished',
+            });
+          }
         }
       });
+  }
+
+  itemAddedFromModal(task: Tasks) {
+    this.tasks.push(task);
   }
 }

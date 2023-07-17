@@ -1,12 +1,8 @@
-import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
-import { Form, FormBuilder, FormControl, FormGroup } from '@angular/forms';
-import {
-  DialogService,
-  DynamicDialogConfig,
-  DynamicDialogRef,
-} from 'primeng/dynamicdialog';
-import { HOST } from 'src/app/utils/env';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { DynamicDialogRef } from 'primeng/dynamicdialog';
+import { Tasks } from 'src/app/models/tasks/tasks';
+import { TaskService } from 'src/app/services/tasks/task.service';
 import { FormTasks } from 'src/app/utils/forms/FormTasks';
 
 @Component({
@@ -18,10 +14,12 @@ export class FormTasksComponent implements OnInit {
   form: FormGroup = new FormGroup({});
   loadingState: boolean = false;
 
+  @Output() itemAdded = new EventEmitter<Tasks>();
+
   constructor(
     private fb: FormBuilder,
-    private http: HttpClient,
-    private modal: DynamicDialogRef
+    private modal: DynamicDialogRef,
+    private taskService: TaskService
   ) {}
 
   ngOnInit(): void {
@@ -38,12 +36,10 @@ export class FormTasksComponent implements OnInit {
 
   submit() {
     this.loadingState = true;
-    console.log(this.form.get('title')?.value);
-
-    /*
-    this.http.post(`${HOST}/todos`, {
-      title: this.form?.get('title'),
+    this.taskService.addTask(this.form.value).subscribe((response) => {
+      this.loadingState = false;
+      this.modal.close(this.form.value);
     });
-    */
+    this.itemAdded.emit(this.form.value);
   }
 }

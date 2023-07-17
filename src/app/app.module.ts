@@ -16,7 +16,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TasksComponent } from './components/tasks/tasks.component';
 import { AddTasksComponent } from './components/add-tasks/add-tasks.component';
 import { FormTasksComponent } from './components/form-tasks/form-tasks.component';
-import { DialogService, DynamicDialogModule } from 'primeng/dynamicdialog';
+import {
+  DialogService,
+  DynamicDialogModule,
+  DynamicDialogRef,
+} from 'primeng/dynamicdialog';
 import { ModalAddTasksComponent } from './components/add-tasks/modal-add-tasks/modal-add-tasks.component';
 import { InputTextModule } from 'primeng/inputtext';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
@@ -45,7 +49,13 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
     InputTextModule,
     ProgressSpinnerModule,
   ],
-  providers: [TaskService, HttpClient, MessageService, DialogService],
+  providers: [
+    TaskService,
+    HttpClient,
+    MessageService,
+    DialogService,
+    DynamicDialogRef,
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
