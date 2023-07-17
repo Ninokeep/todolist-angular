@@ -22,6 +22,9 @@
       label="Submit"
       pButton
       type="submit"
+      [disabled]="
+        !this.form.get('title')?.value || !this.form.get('name')?.value
+      "
       [loading]="loadingState"
     ></button>
   </div>
