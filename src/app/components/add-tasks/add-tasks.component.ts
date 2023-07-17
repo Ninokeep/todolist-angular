@@ -19,7 +19,9 @@ export class AddTasksComponent {
     });
 
     modal.onClose.subscribe((task: Tasks) => {
-      this.itemAdded.emit(task);
+      if (task) {
+        this.itemAdded.emit(task);
+      }
     });
   }
 }
