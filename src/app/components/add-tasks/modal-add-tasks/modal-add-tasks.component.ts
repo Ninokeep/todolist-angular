@@ -8,10 +8,4 @@ import { Tasks } from 'src/app/models/tasks/tasks';
 })
 export class ModalAddTasksComponent implements OnInit {
   ngOnInit(): void {}
-
-  getItemAdded(item: Tasks) {
-    this.itemAdded.emit(item);
-  }
-
-  @Output() itemAdded = new EventEmitter<Tasks>();
 }

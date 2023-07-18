@@ -14,8 +14,6 @@ export class FormTasksComponent implements OnInit {
   form: FormGroup = new FormGroup({});
   loadingState: boolean = false;
 
-  @Output() itemAdded = new EventEmitter<Tasks>();
-
   constructor(
     private fb: FormBuilder,
     private modal: DynamicDialogRef,
@@ -40,6 +38,5 @@ export class FormTasksComponent implements OnInit {
       this.loadingState = false;
       this.modal.close(this.form.value);
     });
-    this.itemAdded.emit(this.form.value);
   }
 }
