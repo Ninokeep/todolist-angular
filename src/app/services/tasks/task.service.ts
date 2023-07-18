@@ -25,4 +25,8 @@ export class TaskService {
       finished: task.finished,
     });
   }
+
+  removeTaskById(taskId: number): Observable<Tasks> {
+    return this.http.delete<Tasks>(`${HOST}/todos/${taskId}`);
+  }
 }

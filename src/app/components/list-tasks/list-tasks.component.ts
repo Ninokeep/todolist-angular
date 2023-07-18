@@ -23,6 +23,10 @@ export class ListTasksComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadingState = true;
+    this.initTasks();
+  }
+
+  initTasks() {
     this.taskService
       .getTasks()
       .pipe(takeUntil(this.destroy$))
@@ -65,6 +69,21 @@ export class ListTasksComponent implements OnInit {
   }
 
   itemAddedFromModal(task: Tasks) {
-    this.tasks.push(task);
+    this.taskService
+      .getTasks()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(
+        (tasks: Tasks[]) => {
+          this.tasks = tasks;
+          this.loadingState = false;
+        },
+        (err) => {
+          this.loadingState = false;
+        }
+      );
+  }
+
+  removedTask() {
+    this.initTasks();
   }
 }

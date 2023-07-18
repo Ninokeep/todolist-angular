@@ -1,15 +1,24 @@
 <div class="container--card-header">
-  <p-checkbox
-    [(ngModel)]="task.finished"
-    [binary]="true"
-    (onChange)="updateTask(task.id, !task.finished)"
-  />
-  <div class="flex">
+  <div class="container-checkbox">
+    <p-checkbox
+      [(ngModel)]="task.finished"
+      [binary]="true"
+      (onChange)="updateTask(task.id, !task.finished)"
+    />
+  </div>
+  <div class="container-task--content">
     <div>
       <h3 class="title">{{ task.title }}</h3>
     </div>
     <div class="container--card-content">
       <p class="text-gray">{{ task.name }}</p>
     </div>
+  </div>
+  <div class="container-task--remove">
+    <p-button
+      icon="pi pi-trash"
+      styleClass="p-button-danger"
+      (click)="removeTaskById(task.id)"
+    ></p-button>
   </div>
 </div>

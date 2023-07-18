@@ -6,6 +6,7 @@
         <app-tasks
           [task]="item"
           (tasksUpdate)="updateStatusTask($event)"
+          (taskRemoved)="removedTask()"
         ></app-tasks>
       </div>
     </div>

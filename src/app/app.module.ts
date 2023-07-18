@@ -24,6 +24,7 @@ import {
 import { ModalAddTasksComponent } from './components/add-tasks/modal-add-tasks/modal-add-tasks.component';
 import { InputTextModule } from 'primeng/inputtext';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
+import { TagModule } from 'primeng/tag';
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
     DynamicDialogModule,
     InputTextModule,
     ProgressSpinnerModule,
+    TagModule,
   ],
   providers: [
     TaskService,
