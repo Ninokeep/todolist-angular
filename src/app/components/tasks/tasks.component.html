@@ -18,6 +18,7 @@
     <p-button
       icon="pi pi-trash"
       styleClass="p-button-danger"
+      [loading]="loadingState"
       (click)="removeTaskById(task.id)"
     ></p-button>
   </div>

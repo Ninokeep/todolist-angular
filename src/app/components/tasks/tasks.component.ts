@@ -13,6 +13,7 @@ export type TaskUpdated = {
   styleUrls: ['./tasks.component.scss'],
 })
 export class TasksComponent {
+  loadingState: boolean = false;
   @Input() task!: Tasks;
 
   @Output() tasksUpdate = new EventEmitter<TaskUpdated>();
@@ -24,10 +25,17 @@ export class TasksComponent {
   }
 
   removeTaskById(taskId: number) {
-    this.taskService.removeTaskById(taskId).subscribe((response) => {
-      if (response) {
-        this.taskRemoved.emit();
+    this.loadingState = true;
+    this.taskService.removeTaskById(taskId).subscribe(
+      (response) => {
+        if (response) {
+          this.taskRemoved.emit();
+          this.loadingState = false;
+        }
+      },
+      (err) => {
+        this.loadingState = false;
       }
-    });
+    );
   }
 }
