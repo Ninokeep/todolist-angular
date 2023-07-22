@@ -1,7 +1,6 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
-import { DynamicDialogRef } from 'primeng/dynamicdialog';
-import { Tasks } from 'src/app/models/tasks/tasks';
+import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { TaskService } from 'src/app/services/tasks/task.service';
 import { FormTasks } from 'src/app/utils/forms/FormTasks';
 
@@ -13,18 +12,32 @@ import { FormTasks } from 'src/app/utils/forms/FormTasks';
 export class FormTasksComponent implements OnInit {
   form: FormGroup = new FormGroup({});
   loadingState: boolean = false;
+  @Input() updateTask = false;
 
   constructor(
     private fb: FormBuilder,
     private modal: DynamicDialogRef,
-    private taskService: TaskService
+    private taskService: TaskService,
+    private dynamicConfigDialog: DynamicDialogConfig
   ) {}
 
   ngOnInit(): void {
     this.form = this.fb.nonNullable.group<FormTasks>({
-      title: new FormControl(),
-      name: new FormControl(),
-      finished: new FormControl(),
+      title: new FormControl(
+        this.dynamicConfigDialog.data?.task.title
+          ? this.dynamicConfigDialog.data?.task.title
+          : undefined
+      ),
+      name: new FormControl(
+        this.dynamicConfigDialog.data?.task.name
+          ? this.dynamicConfigDialog.data?.task.name
+          : undefined
+      ),
+      finished: new FormControl(
+        this.dynamicConfigDialog.data?.task.finished
+          ? this.dynamicConfigDialog.data?.task.finished
+          : undefined
+      ),
     });
   }
 
@@ -34,9 +47,19 @@ export class FormTasksComponent implements OnInit {
 
   submit() {
     this.loadingState = true;
-    this.taskService.addTask(this.form.value).subscribe((response) => {
-      this.loadingState = false;
-      this.modal.close(this.form.value);
-    });
+    if (this.updateTask) {
+      this.taskService
+        .updateTaskById(this.dynamicConfigDialog.data?.task.id, this.form.value)
+        .subscribe((response) => {
+          this.loadingState = false;
+          this.modal.close(this.form.value);
+          this.dynamicConfigDialog.data.taskEmit.emit();
+        });
+    } else {
+      this.taskService.addTask(this.form.value).subscribe((response) => {
+        this.loadingState = false;
+        this.modal.close(this.form.value);
+      });
+    }
   }
 }

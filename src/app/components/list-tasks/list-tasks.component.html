@@ -5,8 +5,9 @@
       <div class="card">
         <app-tasks
           [task]="item"
-          (tasksUpdate)="updateStatusTask($event)"
+          (tasksStatusUpdate)="updateStatusTask($event)"
           (taskRemoved)="removedTask()"
+          (taskUpdate)="taskUpdate()"
         ></app-tasks>
       </div>
     </div>

@@ -86,4 +86,8 @@ export class ListTasksComponent implements OnInit {
   removedTask() {
     this.initTasks();
   }
+
+  taskUpdate() {
+    this.initTasks();
+  }
 }

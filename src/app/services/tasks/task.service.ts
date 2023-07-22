@@ -29,4 +29,8 @@ export class TaskService {
   removeTaskById(taskId: number): Observable<Tasks> {
     return this.http.delete<Tasks>(`${HOST}/todos/${taskId}`);
   }
+
+  updateTaskById(taskId: number, task: Tasks) {
+    return this.http.put<Tasks>(`${HOST}/todos/${taskId}`, { ...task });
+  }
 }

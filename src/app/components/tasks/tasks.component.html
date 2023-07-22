@@ -16,6 +16,11 @@
   </div>
   <div class="container-task--remove">
     <p-button
+      icon="pi pi-pencil"
+      [loading]="loadingState"
+      (click)="updateTaskById(task.id, task)"
+    ></p-button>
+    <p-button
       icon="pi pi-trash"
       styleClass="p-button-danger"
       [loading]="loadingState"
