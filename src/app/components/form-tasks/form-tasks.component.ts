@@ -4,6 +4,12 @@ import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { TaskService } from 'src/app/services/tasks/task.service';
 import { FormTasks } from 'src/app/utils/forms/FormTasks';
 
+type DataModal = {
+  id: number;
+  title: string;
+  name: string;
+  finished: boolean;
+};
 @Component({
   selector: 'app-form-tasks',
   templateUrl: './form-tasks.component.html',
@@ -13,7 +19,7 @@ export class FormTasksComponent implements OnInit {
   form: FormGroup = new FormGroup({});
   loadingState: boolean = false;
   @Input() updateTask = false;
-
+  dataFromModal?: DataModal;
   constructor(
     private fb: FormBuilder,
     private modal: DynamicDialogRef,
@@ -39,6 +45,10 @@ export class FormTasksComponent implements OnInit {
           : undefined
       ),
     });
+
+    if (this.updateTask) {
+      this.dataFromModal = this.dynamicConfigDialog.data.task;
+    }
   }
 
   back() {

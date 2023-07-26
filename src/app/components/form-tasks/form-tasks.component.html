@@ -23,7 +23,10 @@
       pButton
       type="submit"
       [disabled]="
-        !this.form.get('title')?.value || !this.form.get('name')?.value
+        (!this.form.get('title')?.value ||
+          this.form.get('title')?.value === this.dataFromModal?.title) &&
+        (!this.form.get('name')?.value ||
+          this.form.get('name')?.value === this.dataFromModal?.name)
       "
       [loading]="loadingState"
     ></button>

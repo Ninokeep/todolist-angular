@@ -8,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ModalAddTasksComponent implements OnInit {
   updateTask: boolean = false;
+
   constructor(private dynamicDialogConfig: DynamicDialogConfig) {}
   ngOnInit(): void {
     this.updateTask = this.dynamicDialogConfig.data?.taskUpdate

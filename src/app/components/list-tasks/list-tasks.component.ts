@@ -32,7 +32,9 @@ export class ListTasksComponent implements OnInit {
       .pipe(takeUntil(this.destroy$))
       .subscribe(
         (tasks: Tasks[]) => {
-          this.tasks = tasks;
+          this.tasks = tasks.sort(
+            (taskA, taskB) => +taskA.finished - +taskB.finished
+          );
           this.loadingState = false;
         },
         (err) => {
